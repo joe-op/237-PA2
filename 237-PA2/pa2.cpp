@@ -20,11 +20,15 @@ using namespace std;
 // TODO: implement all these method stubs!
 data_set::data_set()
 {
-
+	curr_cap = 10;
+	curr_size = 0;
+	points = new double[curr_cap];
 }
 
 data_set::data_set(int initial_capacity)
 {
+
+	// initial capacity, verify()
 
 }
 
@@ -33,14 +37,35 @@ data_set::data_set(const data_set &original)
 
 }
 
-data_set &data_set::operator=(const data_set &original)
+data_set data_set::operator=(const data_set &original)
 {
+	// if this == &original return *this;
+	curr_cap = original.curr_cap;
+	curr_size = original.curr_size;
+	delete[] points;
+	points = new double[curr_cap];
+	for (int i = 0; i < curr_size; i++) {
+		points[i] = original.points[i];
+	}
+
+
 	return *this;
+}
+
+void data_set::reallocate() {
+	curr_cap *= 2;
+	double* temp = new double[curr_cap];
+	for (int i = 0; i < curr_size; i++)
+		temp[i] = points[i];
+
+	delete[] points;
+	points = temp;
 }
 
 data_set::~data_set()
 {
-
+	delete[] points;
+	points = NULL;
 }
 
 void data_set::insert(double value)
