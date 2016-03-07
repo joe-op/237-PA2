@@ -17,7 +17,10 @@
 using namespace std;
 
 
-// TODO: implement all these method stubs!
+/*
+ * Default constructor for data_set
+ * Sets capacity to 10
+ */
 data_set::data_set()
 {
 	curr_cap = 10;
@@ -25,31 +28,41 @@ data_set::data_set()
 	points = new double[curr_cap];
 }
 
+/*
+ * Alternate constructor for data_set
+ * Input: capacity (int)
+ * Output: A data_set object
+ */
 data_set::data_set(int initial_capacity)
 {
-
+	curr_cap = initial_capacity;
+	curr_size = 0;
+	points = new double[curr_cap];
 	// initial capacity, verify()
 
 }
 
-data_set::data_set(const data_set &original)
+/*
+ * Allow = to be used for deep copies
+ * Input: A data_set object
+ * Output: A copy of the data_set object
+ */
+data_set &data_set::operator=(const data_set &original)
 {
-
-}
-
-data_set data_set::operator=(const data_set &original)
-{
-	// if this == &original return *this;
-	curr_cap = original.curr_cap;
-	curr_size = original.curr_size;
-	delete[] points;
-	points = new double[curr_cap];
-	for (int i = 0; i < curr_size; i++) {
-		points[i] = original.points[i];
+	if (this == &original) {
+		return *this;
 	}
-
-
-	return *this;
+	else
+	{
+		curr_cap = original.curr_cap;
+		curr_size = original.curr_size;
+		delete[] points;
+		points = new double[curr_cap];
+		for (int i = 0; i < curr_size; i++) {
+			points[i] = original.points[i];
+		}
+		return *this;
+	}
 }
 
 void data_set::reallocate() {
@@ -62,6 +75,9 @@ void data_set::reallocate() {
 	points = temp;
 }
 
+/*
+ * 
+ */
 data_set::~data_set()
 {
 	delete[] points;
