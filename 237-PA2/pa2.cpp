@@ -76,7 +76,7 @@ void data_set::reallocate() {
 }
 
 /*
- * 
+ * Get rid of points when data_set goes out of scope
  */
 data_set::~data_set()
 {
@@ -84,8 +84,18 @@ data_set::~data_set()
 	points = NULL;
 }
 
+/* 
+ * Put a double in the arry
+ * Input: A double
+ * Output: None
+ */
 void data_set::insert(double value)
 {
+	if (curr_size == curr_cap)
+	{
+		reallocate();
+	}
+	// use partial filled array insert algorithm
 
 }
 
