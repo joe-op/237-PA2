@@ -9,7 +9,7 @@
 #pragma once
 #include <iostream>
 using namespace std;
-class data_set {\
+class data_set {
 public:
 	data_set();
 	data_set(int initial_capacity);

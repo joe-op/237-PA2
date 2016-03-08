@@ -85,7 +85,7 @@ data_set::~data_set()
 }
 
 /* 
- * Put a double in the arry
+ * Put a double in the array
  * Input: A double
  * Output: None
  */
@@ -118,6 +118,10 @@ double data_set::mean() const
 	return 0.0;
 }
 
+/*
+*returns the median of the numbered set in the array points
+*either by finding the average of the two medians or the actual median
+*/
 double data_set::median() const
 {
 	double median = NULL;
@@ -130,28 +134,21 @@ double data_set::median() const
 	return median;
 }
 
+/*
+*finds the smallest doulbe of the array
+*/
 double data_set::minimum() const
 {
-	double min = NULL;
-	for (int i = 0; i < curr_size; i++)
-	{
-		if (points[i] < min)
-			min = points[i];
-	}
-
-
-
-	return 0.0;
+	double min = points[0];
+	return min;
 }
 
+/*
+*finds the largest doulbe of the array
+*/
 double data_set::maximum() const
 {
-	double max=NULL;
-	for(int i = 0; i < curr_size; i++)
-	{
-		if (points[i] > max)
-			max = points[i];
-	}
+	double max = points[curr_size - 1];
 	return max;
 }
 
