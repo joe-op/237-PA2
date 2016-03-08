@@ -16,6 +16,8 @@
 
 using namespace std;
 
+/*  Begin data_set definitions  */
+
 
 /*
  * Default constructor for data_set
@@ -109,9 +111,24 @@ void data_set::insert(double value)
 	}
 }
 
+/* 
+Print the values in the data set
+Input: an ostream object
+Output: None
+*/
 void data_set::print(ostream &out) const
 {
-
+	if (curr_size <= 0) {
+		out << "{ }\n";
+	}
+	else {
+		out << "{ " << points[0];
+		int i = 1;
+		while (i < curr_size) {
+			out << ", " << points[i];
+		}
+		out << " }\n";
+	}
 }
 
 int data_set::size() const
@@ -144,9 +161,18 @@ double data_set::maximum() const
 	return 0.0;
 }
 
+
+/*  End data_set definitions  */
+
+void pause_237(bool);
+int test_data_set();
+
+
+
 int main()
 {
 	int failed = test_data_set();
+	cout << failed;
 
 	/*
 	string error_input;
