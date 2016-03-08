@@ -95,7 +95,18 @@ void data_set::insert(double value)
 	{
 		reallocate();
 	}
-	// use partial filled array insert algorithm
+	for (int i = curr_size; i >= 0; i--) {
+		if (value > points[i]) {
+			points[i + 1] = value;
+			break;
+		}
+		else if (i == 0) {
+			points[i] = value;
+		}
+		else {
+			points[i + 1] = points[i];
+		}
+	}
 }
 
 void data_set::print(ostream &out) const
