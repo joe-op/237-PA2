@@ -56,6 +56,7 @@ data_set &data_set::operator=(const data_set &original)
 	}
 	else
 	{
+		cout << "**** " << original.curr_size << " ******\n";
 		curr_cap = original.curr_cap;
 		curr_size = original.curr_size;
 		delete[] points;
@@ -97,16 +98,26 @@ void data_set::insert(double value)
 	{
 		reallocate();
 	}
-	for (int i = curr_size; i >= 0; i--) {
-		if (value > points[i]) {
-			points[i + 1] = value;
-			break;
-		}
-		else if (i == 0) {
-			points[i] = value;
-		}
-		else {
-			points[i + 1] = points[i];
+
+	if (curr_size == 0) {
+		points[0] = value;
+		curr_size++;
+	}
+	else {
+		for (int i = curr_size - 1; i >= 0; i--) {
+			if (value > points[i]) {
+				points[i + 1] = value;
+				curr_size++;
+				break;
+			}
+			else if (i == 0) {
+				points[i] = value;
+				curr_size++;
+				break;
+			}
+			else {
+				points[i + 1] = points[i];
+			}
 		}
 	}
 }
@@ -126,6 +137,7 @@ void data_set::print(ostream &out) const
 		int i = 1;
 		while (i < curr_size) {
 			out << ", " << points[i];
+			i++;
 		}
 		out << " }\n";
 	}
@@ -180,8 +192,14 @@ int test_data_set();
 
 int main()
 {
+
+
+	data_set myd = data_set();
+	myd.insert(0);
+	myd.insert(20);
+
+
 	int failed = test_data_set();
-	cout << failed;
 
 	/*
 	string error_input;
