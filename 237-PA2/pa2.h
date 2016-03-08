@@ -1,3 +1,11 @@
+/****************************************************************
+* Title:       CS 237 Programming Assignment #2
+* Author:      Joe Opseth & Jens Myklebust
+* Created:     22 February 2016
+* Modified:
+* Description: Tests a dynamically-allocated, sorted array class.
+* Team:        Group 5
+****************************************************************/
 #pragma once
 #include <iostream>
 using namespace std;

@@ -120,18 +120,43 @@ double data_set::mean() const
 
 double data_set::median() const
 {
-	return 0.0;
+	double median = NULL;
+	if (curr_size % 2 == 0)
+		median = ((points[curr_size / 2])+(points[(curr_size/2)-1])/2);
+	else
+	{
+		median = points[(curr_size / 2) - 1];
+	}
+	return median;
 }
 
 double data_set::minimum() const
 {
+	double min = NULL;
+	for (int i = 0; i < curr_size; i++)
+	{
+		if (points[i] < min)
+			min = points[i];
+	}
+
+
+
 	return 0.0;
 }
 
 double data_set::maximum() const
 {
-	return 0.0;
+	double max=NULL;
+	for(int i = 0; i < curr_size; i++)
+	{
+		if (points[i] > max)
+			max = points[i];
+	}
+	return max;
 }
+
+void pause_237(bool);
+int test_data_set();
 
 int main()
 {
