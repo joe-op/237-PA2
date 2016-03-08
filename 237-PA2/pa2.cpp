@@ -96,7 +96,6 @@ void data_set::insert(double value)
 		reallocate();
 	}
 	// use partial filled array insert algorithm
-
 }
 
 void data_set::print(ostream &out) const
