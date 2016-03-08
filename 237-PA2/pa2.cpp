@@ -138,6 +138,22 @@ int main()
 {
 	int failed = test_data_set();
 
+	/*
+	string error_input;
+	double number;
+
+	cin >> number; // "quit"
+	if(cin.fail())
+	{
+		getline(cin, error_input);
+		if(error_input=="quit") {
+			// quit
+		} else {
+		    // error!
+		}
+	}
+	*/
+	
 	// TODO: Read doubles in a loop and add them to a data set.  Repeat
 	//   the loop on invalid input, then end when the user types "quit".
 	//   Print the data set before each prompt.
