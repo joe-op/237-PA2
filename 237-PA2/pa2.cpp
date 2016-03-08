@@ -143,11 +143,16 @@ int data_set::capacity() const
 
 double data_set::mean() const
 {
-	int sum = 0;
-	for (int i = 0; i < curr_size; i++) {
-		sum += points[i];
+	if (curr_size == 0) {
+		return 0;
 	}
-	return sum / curr_size;
+	else {
+		int sum = 0;
+		for (int i = 0; i < curr_size; i++) {
+			sum += points[i];
+		}
+		return sum / curr_size;
+	}
 }
 
 double data_set::median() const
