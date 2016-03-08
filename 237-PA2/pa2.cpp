@@ -133,17 +133,21 @@ void data_set::print(ostream &out) const
 
 int data_set::size() const
 {
-	return 0;
+	return curr_size;
 }
 
 int data_set::capacity() const
 {
-	return 0;
+	return curr_cap;
 }
 
 double data_set::mean() const
 {
-	return 0.0;
+	int sum = 0;
+	for (int i = 0; i < curr_size; i++) {
+		sum += points[i];
+	}
+	return sum / curr_size;
 }
 
 double data_set::median() const
