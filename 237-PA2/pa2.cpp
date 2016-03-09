@@ -2,7 +2,7 @@
 * Title:       CS 237 Programming Assignment #2
 * Author:      Joe Opseth & Jens Myklebust
 * Created:     22 February 2016
-* Modified:
+* Modified:    08 March 2016
 * Description: Tests a dynamically-allocated, sorted array class.
 * Team:        Group 5
 ****************************************************************/
@@ -15,6 +15,14 @@
 #include "pa2.h"
 
 using namespace std;
+
+/*
+TODO:
+Add input/output documentation to functions
+Add other documentation as needed
+Write loop in main() to allow user to fill array
+Write rest of main
+*/
 
 /*  Begin data_set definitions  */
 
