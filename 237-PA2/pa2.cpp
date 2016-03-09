@@ -16,6 +16,8 @@
 
 using namespace std;
 
+/*  Begin data_set definitions  */
+
 
 /*
  * Default constructor for data_set
@@ -54,6 +56,7 @@ data_set &data_set::operator=(const data_set &original)
 	}
 	else
 	{
+		cout << "**** " << original.curr_size << " ******\n";
 		curr_cap = original.curr_cap;
 		curr_size = original.curr_size;
 		delete[] points;
@@ -85,7 +88,7 @@ data_set::~data_set()
 }
 
 /* 
- * Put a double in the array
+ * Put a double in the arry
  * Input: A double
  * Output: None
  */
@@ -95,68 +98,107 @@ void data_set::insert(double value)
 	{
 		reallocate();
 	}
-	// use partial filled array insert algorithm
+	if (curr_size == 0) {
+		points[0] = value;
+		curr_size = 1;
+	}
+	else {
+		for (int i = curr_size - 1; i >= 0; i--) {
+			if (value > points[i]) {
+				points[i + 1] = value;
+				curr_size++;
+				return;
+			}
+			else if (i == 0) {
+				points[i + 1] = points[i];
+				points[0] = value;
+				curr_size++;
+				return;
+			}
+			else {
+				points[i + 1] = points[i];
+			}
+		}
+	}
 }
 
+/* 
+Print the values in the data set
+Input: an ostream object
+Output: None
+*/
 void data_set::print(ostream &out) const
 {
-
+	if (curr_size <= 0) {
+		out << "{ }\n";
+	}
+	else {
+		out << "{ " << points[0];
+		int i = 1;
+		while (i < curr_size) {
+			out << ", " << points[i];
+			i++;
+		}
+		out << " }\n";
+	}
 }
 
 int data_set::size() const
 {
-	return 0;
+	return curr_size;
 }
 
 int data_set::capacity() const
 {
-	return 0;
+	return curr_cap;
 }
 
 double data_set::mean() const
 {
+	if (curr_size == 0) {
+		return 0;
+	}
+	else {
+		int sum = 0;
+		for (int i = 0; i < curr_size; i++) {
+			sum += points[i];
+		}
+		return sum / curr_size;
+	}
+}
+
+double data_set::median() const
+{
 	return 0.0;
 }
 
-/*
-*returns the median of the numbered set in the array points
-*either by finding the average of the two medians or the actual median
-*/
-double data_set::median() const
-{
-	double median = NULL;
-	if (curr_size % 2 == 0)
-		median = ((points[curr_size / 2])+(points[(curr_size/2)-1])/2);
-	else
-	{
-		median = points[(curr_size / 2) - 1];
-	}
-	return median;
-}
-
-/*
-*finds the smallest doulbe of the array
-*/
 double data_set::minimum() const
 {
-	double min = points[0];
-	return min;
+	return 0.0;
 }
 
-/*
-*finds the largest doulbe of the array
-*/
 double data_set::maximum() const
 {
-	double max = points[curr_size - 1];
-	return max;
+	return 0.0;
 }
+
+
+/*  End data_set definitions  */
 
 void pause_237(bool);
 int test_data_set();
 
+
+
 int main()
 {
+
+
+	data_set myd = data_set();
+	myd.insert(0);
+	myd.insert(20);
+
+
 	int failed = test_data_set();
 
 	/*
