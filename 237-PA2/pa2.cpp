@@ -169,17 +169,38 @@ double data_set::mean() const
 
 double data_set::median() const
 {
-	return 0.0;
+	if (curr_size <= 0) {
+		throw runtime_error("Empty array!");
+	}
+	else {
+		double median = NULL;
+		if (curr_size % 2 == 0)
+			median = ((points[curr_size / 2]) + (points[curr_size / 2] - 1) / 2);
+		else {
+			median = points[(curr_size / 2) - 1];
+		}
+		return median;
+	}
 }
 
 double data_set::minimum() const
 {
-	return 0.0;
+	if (curr_size <= 0) {
+		throw runtime_error("Empty array!");
+	}
+	else {
+		return points[0];
+	}
 }
 
 double data_set::maximum() const
 {
-	return 0.0;
+	if (curr_size <= 0) {
+		throw runtime_error("Empty array!");
+	}
+	else {
+		return points[curr_size - 1];
+	}
 }
 
 
@@ -192,13 +213,6 @@ int test_data_set();
 
 int main()
 {
-
-
-	data_set myd = data_set();
-	myd.insert(0);
-	myd.insert(20);
-
-
 	int failed = test_data_set();
 
 	/*
