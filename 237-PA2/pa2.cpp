@@ -45,6 +45,20 @@ data_set::data_set(int initial_capacity)
 }
 
 /*
+Copy constructor for deep copies
+Input: A data_set object
+Output: A data_set object
+*/
+data_set::data_set(const data_set &original) {
+	curr_cap = original.curr_cap;
+	curr_size = original.curr_size;
+	points = new double[curr_cap];
+	for (int i = 0; i < curr_size; i++) {
+		points[i] = original.points[i];
+	}
+}	
+
+/*
  * Allow = to be used for deep copies
  * Input: A data_set object
  * Output: A copy of the data_set object
@@ -56,7 +70,6 @@ data_set &data_set::operator=(const data_set &original)
 	}
 	else
 	{
-		cout << "**** " << original.curr_size << " ******\n";
 		curr_cap = original.curr_cap;
 		curr_size = original.curr_size;
 		delete[] points;

@@ -14,6 +14,7 @@ public:
 	data_set();
 	data_set(int initial_capacity);
 	data_set &data_set::operator=(const data_set&);
+	data_set(const data_set &original);
 	~data_set(); // destructor
 
 	void insert(double);
