@@ -169,10 +169,10 @@ int data_set::capacity() const
 double data_set::mean() const
 {
 	if (curr_size == 0) {
-		return 0;
+		throw runtime_error("Requested mean of empty array!");
 	}
 	else {
-		int sum = 0;
+		double sum = 0;
 		for (int i = 0; i < curr_size; i++) {
 			sum += points[i];
 		}
@@ -188,9 +188,9 @@ double data_set::median() const
 	else {
 		double median = NULL;
 		if (curr_size % 2 == 0)
-			median = ((points[curr_size / 2]) + (points[curr_size / 2] - 1) / 2);
+			median = (points[curr_size / 2] + points[curr_size / 2 - 1]) / 2;
 		else {
-			median = points[(curr_size / 2) - 1];
+			median = points[(curr_size / 2)];
 		}
 		return median;
 	}
@@ -457,6 +457,73 @@ int test_data_set()
 	// TODO: implement two tests each for mean, maximum, and median.
 
 	// If you are doing the bonus, remember the five test cases for remove!
+
+	/*
+	Tests for mean
+	1. Test for exception on empty array
+	2. Test for correct value from working array
+	*/
+	curr_test++;
+	caught = false;
+	try {
+		double x = empty.mean();
+	}
+	catch (exception e) {
+		caught = true;
+	}
+	if (!caught) {
+		cerr << "Test " << curr_test << " failed: missing exception" << endl;
+		failed++;
+	}
+	curr_test++;
+	if (working.mean() != 4.5) {
+		cerr << "Test " << curr_test << " failed: got " << working.mean() << ", expected 4.5." << endl;
+		failed++;
+	}
+
+	/*
+	Tests for maximum
+	1. Test for exception on empty array
+	2. Test for correct value from working array
+	*/
+	curr_test++;
+	caught = false;
+	try {
+		double x = empty.maximum();
+	}
+	catch (exception e) {
+		caught = true;
+	}
+	if (!caught) {
+		cerr << "Test " << curr_test << " failed: missing exception" << endl;
+		failed++;
+	}
+	curr_test++;
+	if (working.maximum() != 5.5) {
+		cerr << "Test " << curr_test << " failed: got " << working.maximum() << ", expected 5.5 ." << endl;
+		failed++;
+	}
+
+	/*
+	  Tests for median
+	  1. Test working set
+	  2. Add a value and test working set again
+	*/
+	curr_test++;
+	if (working.median() != 4.5) {
+		cerr << "Test " << curr_test << " failed: got " << working.median() << ", expected 4.5 ." << endl;
+		failed++;
+	}
+	curr_test++;
+	data_set median_copy(working);
+	median_copy.insert(5.5);
+	if (median_copy.median() != 5) {
+		cerr << "Test " << curr_test << " failed: got " << median_copy.median() << ", expected 5 ." << endl;
+		failed++;
+	}
+
+
+	// Output for successful test
 
 	if (failed == 0)
 	{
