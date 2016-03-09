@@ -98,22 +98,22 @@ void data_set::insert(double value)
 	{
 		reallocate();
 	}
-
 	if (curr_size == 0) {
 		points[0] = value;
-		curr_size++;
+		curr_size = 1;
 	}
 	else {
 		for (int i = curr_size - 1; i >= 0; i--) {
 			if (value > points[i]) {
 				points[i + 1] = value;
 				curr_size++;
-				break;
+				return;
 			}
 			else if (i == 0) {
-				points[i] = value;
+				points[i + 1] = points[i];
+				points[0] = value;
 				curr_size++;
-				break;
+				return;
 			}
 			else {
 				points[i + 1] = points[i];
