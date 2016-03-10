@@ -20,7 +20,6 @@ using namespace std;
 TODO:
 Add input/output documentation to functions
 Add other documentation as needed
-Write loop in main() to allow user to fill array
 Write rest of main
 */
 
@@ -30,6 +29,8 @@ Write rest of main
 /*
  * Default constructor for data_set
  * Sets capacity to 10
+ * Input: none
+ * Output: a data_set object
  */
 data_set::data_set()
 {
@@ -89,6 +90,11 @@ data_set &data_set::operator=(const data_set &original)
 	}
 }
 
+/*
+ * Expand the capacity of the data_set array
+ * Input: none
+ * Output: none
+ */
 void data_set::reallocate() {
 	curr_cap *= 2;
 	double* temp = new double[curr_cap];
@@ -100,7 +106,9 @@ void data_set::reallocate() {
 }
 
 /*
- * Get rid of points when data_set goes out of scope
+ * Delete the points object when data_set goes out of scope
+ * Input: none
+ * Output: none
  */
 data_set::~data_set()
 {
@@ -109,7 +117,9 @@ data_set::~data_set()
 }
 
 /* 
- * Put a double in the arry
+ * Put a double in the array
+ * Puts a double into the array, keeping the array sorted
+ * by shifting greater numbers to the right
  * Input: A double
  * Output: None
  */
@@ -145,6 +155,8 @@ void data_set::insert(double value)
 
 /* 
 Print the values in the data set
+Values are printed in a set of brackets
+e.g. { 3, 4.2, 7, 8.8 }
 Input: an ostream object
 Output: None
 */
@@ -164,16 +176,32 @@ void data_set::print(ostream &out) const
 	}
 }
 
+/*
+Return the current size of the array
+Input: none
+Output: int
+*/
 int data_set::size() const
 {
 	return curr_size;
 }
 
+/*
+Return the current capacity of the array
+Input: None
+Output: int
+*/
 int data_set::capacity() const
 {
 	return curr_cap;
 }
 
+/*
+Return the mean of the values in the array
+The array cannot be empty
+Input: none
+Output: double
+*/
 double data_set::mean() const
 {
 	if (curr_size == 0) {
@@ -188,6 +216,13 @@ double data_set::mean() const
 	}
 }
 
+/*
+Returns the median value of the values in the array
+Array cannot be empty
+Input: none
+Output: double
+
+*/
 double data_set::median() const
 {
 	if (curr_size <= 0) {
@@ -204,6 +239,11 @@ double data_set::median() const
 	}
 }
 
+/*
+Returns the minimum value in the sorted array
+Input: none
+Output: double
+*/
 double data_set::minimum() const
 {
 	if (curr_size <= 0) {
@@ -214,6 +254,11 @@ double data_set::minimum() const
 	}
 }
 
+/* 
+Returns the maximum value in the sorted array
+Input: none
+Output: double
+*/
 double data_set::maximum() const
 {
 	if (curr_size <= 0) {
@@ -231,7 +276,16 @@ void pause_237(bool);
 int test_data_set();
 
 
-
+/*
+Tests the data_set class
+First, runs a set of tests on the class functions and
+displays the number that failed
+Second, provides a loop for the user to enter values,
+and then displays the size, mean, median, maximum, and
+minimum
+Input: none
+Output: int
+*/
 int main()
 {
 	int failed = test_data_set();
@@ -264,13 +318,20 @@ int main()
 		cout << endl;
 	} while (!done);
 
-	// TODO: Print the final data set, and compute its statistics:
-	//   size, mean, minimum, maximum, and median.
+	cout << endl;
+
+	// display information about data set
 
 	pause_237(false);
 	return 0;
 }
 
+/*
+Pause the program
+Pauses the program and clears the newline if one was entered
+Input: boolean
+Output: none
+*/
 void pause_237(bool have_newline)
 {
 	if (have_newline) {
@@ -283,6 +344,14 @@ void pause_237(bool have_newline)
 	cin.ignore(200, '\n');
 }
 
+/*
+Test data set functions
+Runs a series of tests on the data set 
+class functions and then
+displays how many failed
+Input: none
+Output: int
+*/
 int test_data_set()
 {
 	// Current test number.  Be sure to increment this before each test!
