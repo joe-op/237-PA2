@@ -236,25 +236,33 @@ int main()
 {
 	int failed = test_data_set();
 
-	/*
-	string error_input;
-	double number;
+	// loop for input
 
-	cin >> number; // "quit"
-	if(cin.fail())
-	{
-		getline(cin, error_input);
-		if(error_input=="quit") {
-			// quit
-		} else {
-		    // error!
+	bool done = false;
+	double input;
+	string bad_input;
+
+	data_set myds;
+
+	do {
+		cout << "Current data set:" << endl;
+		myds.print(cout);
+		cout << endl;
+		cout << "Enter a number: ";
+		cin >> input;
+		if (cin.fail()) {
+			cin.clear();
+			getline(cin, bad_input);
+			if (bad_input == "quit")
+				done = true;
+			else
+				cout << "That's not a number!\n";
 		}
-	}
-	*/
-	
-	// TODO: Read doubles in a loop and add them to a data set.  Repeat
-	//   the loop on invalid input, then end when the user types "quit".
-	//   Print the data set before each prompt.
+		else {
+			myds.insert(input);
+		}
+		cout << endl;
+	} while (!done);
 
 	// TODO: Print the final data set, and compute its statistics:
 	//   size, mean, minimum, maximum, and median.
