@@ -2,7 +2,7 @@
 * Title:       CS 237 Programming Assignment #2
 * Author:      Joe Opseth & Jens Myklebust
 * Created:     22 February 2016
-* Modified:    08 March 2016
+* Modified:    10 March 2016
 * Description: Tests a dynamically-allocated, sorted array class.
 * Team:        Group 5
 ****************************************************************/
@@ -12,16 +12,10 @@
 #include <string>
 #include <cmath>
 #include <stdexcept>
+#include <iomanip>
 #include "pa2.h"
 
 using namespace std;
-
-/*
-TODO:
-Add input/output documentation to functions
-Add other documentation as needed
-Write rest of main
-*/
 
 /*  Begin data_set definitions  */
 
@@ -321,6 +315,17 @@ int main()
 	cout << endl;
 
 	// display information about data set
+	cout << "Final data set: " << endl;
+	myds.print(cout);
+	cout << endl;
+
+	cout << left << setw(15) << "Size:" << myds.size() << endl;
+	cout << left << setw(15) << "Mean:" << myds.mean() << endl;
+	cout << left << setw(15) << "Median:" << myds.median() << endl;
+	cout << left << setw(15) << "Maximum:" << myds.maximum() << endl;
+	cout << left << setw(15) << "Minimum:" << myds.minimum() << endl;
+
+
 
 	pause_237(false);
 	return 0;
