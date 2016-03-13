@@ -646,6 +646,50 @@ int test_data_set()
 		cerr << "Test " << curr_test << " failed: got " << median_copy.median() << ", expected 5 ." << endl;
 		failed++;
 	}
+	/*
+	 * Tests for remove
+	 * Make a copy of working
+	 * 1. Remove 3.5 and verify removed
+	 * 2. Insert 3.5, remove 4.5 and verify removed & shifted
+	 * 3. Remove 7 and verify nothing changed
+	 * 4. Remove remaining values & verify all removed
+	 * 5. Remove something and verify data_set is not changed
+	 */
+	data_set rm_copy(working);
+	bool removed;
+	curr_test++;
+	{
+		ostringstream rm_expected;
+		ostringstream rm_actual;
+		data_set remove_verify(10);
+		remove_verify.insert(4.5);
+		remove_verify.insert(5.5);
+		remove_verify.print(rm_expected);
+		removed = rm_copy.remove(3.5);
+		rm_copy.print(rm_actual);
+		if (!removed || rm_expected.str() != rm_actual.str()) {
+			cout << "Test " << curr_test << " failed; 3.5 was not properly removed.";
+			failed++;
+		}
+	}
+	curr_test++;
+	{
+		ostringstream rm_expected;
+		ostringstream rm_actual;
+		data_set remove_verify(10);
+		remove_verify.insert(3.5);
+		remove_verify.insert(5.5);
+		remove_verify.print(rm_expected);
+		rm_copy.insert(3.5);
+		removed = rm_copy.remove(4.5);
+		rm_copy.print(rm_actual);
+		if (!removed || rm_expected.str() != rm_actual.str()) {
+			cout << "Test " << curr_test << " failed; 4.5 was not properly removed.";
+			failed++;
+		}
+	}
+	curr_test++;
+
 
 
 	// Output for successful test
