@@ -157,7 +157,29 @@ void data_set::insert(double value)
  * Input: double
  * Output: bool
  */
-bool data_set::remove(double);
+bool data_set::remove(double rm_me) {
+	bool found = false;
+	int i = 0;
+	while (!found && i < curr_size) {
+		if (points[i] == rm_me)
+			found = true;
+		else
+			i++;
+	}
+    /* 
+	 * If double was found, decrement curr_size,
+	 * shift remaining values to the left
+	 * and make the last value null
+	 */
+	if (found) {
+		--curr_size;
+		for (int j = i; j < curr_size; j++) {
+			points[j] = points[j + 1];
+		}
+		points[curr_size] = NULL;
+	}
+	return found;
+}
 
 
 /* 

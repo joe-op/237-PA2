@@ -8,7 +8,6 @@
 ****************************************************************/
 #pragma once
 #include <iostream>
-using namespace std;
 class data_set {
 public:
 	data_set();
@@ -19,7 +18,7 @@ public:
 
 	void insert(double);
 	bool remove(double);
-	void print(ostream &out) const;
+	void print(std::ostream &out) const;
 	int size() const;
 	int capacity() const;
 	double mean() const;
