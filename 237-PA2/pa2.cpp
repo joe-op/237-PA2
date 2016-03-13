@@ -181,6 +181,22 @@ bool data_set::remove(double rm_me) {
 	return found;
 }
 
+/*
+ * Return the double value found at index.
+ * Throws an error if the value is not within
+ * [0, curr_size - 1] .
+ * Input: int
+ * Output: double
+ */
+double data_set::get(int index) {
+	if (index >= 0 && index < curr_size) {
+		return points[index];
+	}
+	else {
+		throw runtime_error("Invalid index!");
+	}
+}
+
 
 /* 
 Print the values in the data set
@@ -360,7 +376,15 @@ int main()
 	cout << left << setw(15) << "Maximum:" << myds.maximum() << endl;
 	cout << left << setw(15) << "Minimum:" << myds.minimum() << endl;
 
+	cout << endl << endl;
 
+	// Remove all values from data set and print empty data set
+	for (int i = myds.size() - 1; i >= 0; --i) {
+		myds.remove(myds.get(0));
+	}
+	cout << "Cleared data set: " << endl;
+	myds.print(cout);
+	cout << endl;
 
 	pause_237(false);
 	return 0;
@@ -668,7 +692,7 @@ int test_data_set()
 		removed = rm_copy.remove(3.5);
 		rm_copy.print(rm_actual);
 		if (!removed || rm_expected.str() != rm_actual.str()) {
-			cout << "Test " << curr_test << " failed; 3.5 was not properly removed.";
+			cout << "Test " << curr_test << " failed; 3.5 was not properly removed.\n";
 			failed++;
 		}
 	}
@@ -684,14 +708,44 @@ int test_data_set()
 		removed = rm_copy.remove(4.5);
 		rm_copy.print(rm_actual);
 		if (!removed || rm_expected.str() != rm_actual.str()) {
-			cout << "Test " << curr_test << " failed; 4.5 was not properly removed.";
+			cout << "Test " << curr_test << " failed; 4.5 was not properly removed.\n";
 			failed++;
 		}
 	}
 	curr_test++;
-
-
-
+	{
+		ostringstream rm_expected;
+		ostringstream rm_actual;
+		data_set remove_verify(working);
+		remove_verify.print(rm_expected);
+		rm_copy = working;
+		removed = rm_copy.remove(7);
+		rm_copy.print(rm_actual);
+		if (removed || rm_expected.str() != rm_actual.str()) {
+			cout << "Test " << curr_test << " failed; 7 was not removed properly or deep copy operator may have failed.\n";
+			failed++;
+		}
+	}
+	curr_test++;
+	ostringstream rm_expected;
+	ostringstream rm_actual;
+	data_set remove_verify(10); // expected data_set is empty
+	for (int i = rm_copy.size() - 1; i >= 0; --i) {
+		rm_copy.remove(rm_copy.get(0));
+	}
+	remove_verify.print(rm_expected);
+	rm_copy.print(rm_actual);
+	if (rm_expected.str() != rm_actual.str()) {
+		cout << "Test " << curr_test << " failed; data set was not properly cleared.\n";
+		failed++;
+	}
+	curr_test++;
+	removed = rm_copy.remove(1.1);
+	if (removed || rm_expected.str() != rm_actual.str()) {
+		cout << "Test " << curr_test << " failed; removing value from empty data set caused an error.\n";
+		failed++;
+	}
+	
 	// Output for successful test
 
 	if (failed == 0)

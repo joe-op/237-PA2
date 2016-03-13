@@ -18,6 +18,7 @@ public:
 
 	void insert(double);
 	bool remove(double);
+	double get(int);
 	void print(std::ostream &out) const;
 	int size() const;
 	int capacity() const;
