@@ -2,8 +2,9 @@
 * Title:       CS 237 Programming Assignment #2
 * Author:      Joe Opseth & Jens Myklebust
 * Created:     22 February 2016
-* Modified:    10 March 2016
+* Modified:    13 March 2016
 * Description: Tests a dynamically-allocated, sorted array class.
+               Includes bonus remove function & tests.
 * Team:        Group 5
 ****************************************************************/
 #include <iostream>
@@ -146,6 +147,18 @@ void data_set::insert(double value)
 		}
 	}
 }
+
+/*
+ * Remove a double from the array.
+ * Takes a double as input and removes one
+ * instance of it if it is found;
+ * otherwise, does nothing.
+ * Returns a boolean indicating if the value was found.
+ * Input: double
+ * Output: bool
+ */
+bool data_set::remove(double);
+
 
 /* 
 Print the values in the data set

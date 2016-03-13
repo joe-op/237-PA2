@@ -18,6 +18,7 @@ public:
 	~data_set(); // destructor
 
 	void insert(double);
+	bool remove(double);
 	void print(ostream &out) const;
 	int size() const;
 	int capacity() const;
